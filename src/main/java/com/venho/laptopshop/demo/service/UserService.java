@@ -1,0 +1,10 @@
+package com.venho.laptopshop.demo.service;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class UserService {
+    public String handleHello() {
+        return "hand job me";
+    }
+}
