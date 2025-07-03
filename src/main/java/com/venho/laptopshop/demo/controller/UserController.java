@@ -1,6 +1,7 @@
 package com.venho.laptopshop.demo.controller;
 
 import com.venho.laptopshop.demo.domain.User;
+import com.venho.laptopshop.demo.repository.UserRepository;
 import com.venho.laptopshop.demo.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class UserController {
 
-    private UserService userService;
+    private final UserService userService;
 
     public UserController(UserService userService) {
         this.userService = userService;
@@ -34,6 +35,7 @@ public class UserController {
     @RequestMapping(value = "/admin/user/create1", method = RequestMethod.POST)
     public String createUserPage(Model model, @ModelAttribute("newUser") User hieu) {
         System.out.println("run" + hieu);
+        this.userService.handleSaveUser(hieu);
         return "hello";
     }
 }
