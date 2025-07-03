@@ -3,6 +3,9 @@ package com.venho.laptopshop.demo.controller;
 import com.venho.laptopshop.demo.domain.User;
 import com.venho.laptopshop.demo.repository.UserRepository;
 import com.venho.laptopshop.demo.service.UserService;
+
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,21 +24,21 @@ public class UserController {
 
     @GetMapping("/")
     public String getHomePage(Model model) {
-        String test = this.userService.handleHello();
-        model.addAttribute("nhu", test);
+        List<User> arrUser = this.userService.getAllUserByEmail("quynhnhu0405@gmail.com");
+        System.out.println(arrUser);
         return "hello";
     }
 
     @RequestMapping("/admin/user")
     public String getUserInfo(Model model) {
         model.addAttribute("newUser", new User());
-        return "/admin/user/create";
+        return "/admin/user/showUser";
     }
 
-    @RequestMapping(value = "/admin/user/create1", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/user/create", method = RequestMethod.POST)
     public String createUserPage(Model model, @ModelAttribute("newUser") User hieu) {
         System.out.println("run" + hieu);
         this.userService.handleSaveUser(hieu);
-        return "hello";
+        return "/admin/user/create";
     }
 }
