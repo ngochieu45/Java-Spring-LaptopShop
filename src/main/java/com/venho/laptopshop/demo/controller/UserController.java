@@ -31,14 +31,22 @@ public class UserController {
 
     @RequestMapping("/admin/user")
     public String getUserInfo(Model model) {
+        List<User> users = this.userService.getAllUser();
+        model.addAttribute("users1", users);
+        System.out.println(">>> check users: " + users);
         model.addAttribute("newUser", new User());
         return "/admin/user/showUser";
     }
 
+    @RequestMapping(value = "/admin/user/create")
+    public String getCreateUserPage(Model model) {
+        model.addAttribute("newUser", new User());
+        return "/admin/user/create";
+    }
+
     @RequestMapping(value = "/admin/user/create", method = RequestMethod.POST)
     public String createUserPage(Model model, @ModelAttribute("newUser") User hieu) {
-        System.out.println("run" + hieu);
         this.userService.handleSaveUser(hieu);
-        return "/admin/user/create";
+        return "redirect:/admin/user";
     }
 }

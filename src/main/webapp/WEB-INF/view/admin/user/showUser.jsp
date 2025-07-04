@@ -17,7 +17,7 @@
                         <div class="col-md-11 col-12 mx-auto">
                             <div class="d-flex justify-content-between align-items-center mb-3">
                                 <h3 class="m-0">Table User</h3>
-                                <form action="/admin/user/create" method="POST" class="d-inline">
+                                <form action="/admin/user/create" class="d-inline">
                                     <button type="submit" class="btn btn-primary">Create User</button>
                                 </form>
                             </div>
@@ -32,35 +32,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td><button class="btn btn-success">view</button>
-                                            <button class="btn btn-warning">update</button>
-                                            <button class="btn btn-danger">delete</button>
-                                        </td>
-
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td><button class="btn btn-success">view</button>
-                                            <button class="btn btn-warning">update</button>
-                                            <button class="btn btn-danger">delete</button>
-                                        </td>
-
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>Larry the Bird</td>
-                                        <td>Larry the Bird</td>
-                                        <td><button class="btn btn-success">view</button>
-                                            <button class="btn btn-warning">update</button>
-                                            <button class="btn btn-danger">delete</button>
-                                        </td>
-                                    </tr>
+                                    <c:forEach var="user" items="${users1}">
+                                        <tr>
+                                            <td>${user.id}</td>
+                                            <td>${user.email}</td>
+                                            <td>${user.fullName}</td>
+                                            <td>
+                                                <button class="btn btn-success">View</button>
+                                                <button class="btn btn-warning">Update</button>
+                                                <button class="btn btn-danger">Delete</button>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
                                 </tbody>
                             </table>
                         </div>
