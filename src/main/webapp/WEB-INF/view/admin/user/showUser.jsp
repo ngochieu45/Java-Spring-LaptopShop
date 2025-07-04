@@ -38,9 +38,13 @@
                                             <td>${user.email}</td>
                                             <td>${user.fullName}</td>
                                             <td>
-                                                <button class="btn btn-success">View</button>
-                                                <button class="btn btn-warning">Update</button>
-                                                <button class="btn btn-danger">Delete</button>
+                                                <a href="/admin/user/${user.id}" class="btn btn-success">View</a>
+                                                <a href="/admin/user/${user.id}" class="btn btn-warning">Update</a>
+                                                <form action="/admin/user/delete/${user.id}" method="post"
+                                                    style="display:inline;">
+                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                </form>
+
                                             </td>
                                         </tr>
                                     </c:forEach>

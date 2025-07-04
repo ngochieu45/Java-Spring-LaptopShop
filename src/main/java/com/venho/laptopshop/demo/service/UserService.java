@@ -1,6 +1,7 @@
 package com.venho.laptopshop.demo.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -30,5 +31,13 @@ public class UserService {
 
     public User handleSaveUser(User user) {
         return this.userRepository.save(user);
+    }
+
+    public void deleteUserById(Long id) {
+        this.userRepository.deleteById(id);
+    }
+
+    public Optional<User> getUserDetail(long id) {
+        return this.userRepository.findById(id);
     }
 }
