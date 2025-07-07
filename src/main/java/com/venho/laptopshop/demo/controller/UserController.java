@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class UserController {
@@ -78,6 +79,12 @@ public class UserController {
             userService.handleSaveUser(currentUser);
         }
         return "redirect:/admin/user";
+    }
+
+    @GetMapping("/admin/user/delete/{id}")
+    public String getDeleteUserPage(Model model, @PathVariable("id") long id) {
+        model.addAttribute("id", id);
+        return "/admin/user/delete";
     }
 
     @PostMapping("/admin/user/delete/{id}")

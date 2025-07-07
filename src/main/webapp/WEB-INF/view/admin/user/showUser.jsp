@@ -41,10 +41,13 @@
                                                 <a href="/admin/user/${user.id}" class="btn btn-success">View</a>
                                                 <a href="/admin/user/update/${user.id}"
                                                     class="btn btn-warning">Update</a>
-                                                <form action="/admin/user/delete/${user.id}" method="post"
+
+                                                <a href="/admin/user/delete/${user.id}"
+                                                    class="btn btn-danger">Delete</a>
+                                                <!-- <form action="/admin/user/delete/${user.id}" method="post"
                                                     style="display:inline;">
                                                     <button type="submit" class="btn btn-danger">Delete</button>
-                                                </form>
+                                                </form> -->
 
                                             </td>
                                         </tr>
