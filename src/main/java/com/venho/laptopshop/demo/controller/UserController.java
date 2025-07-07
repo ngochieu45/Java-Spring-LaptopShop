@@ -36,7 +36,6 @@ public class UserController {
     public String getUserInfo(Model model) {
         List<User> users = this.userService.getAllUser();
         model.addAttribute("users1", users);
-        System.out.println(">>> check users: " + users);
         model.addAttribute("newUser", new User());
         return "/admin/user/showUser";
     }
@@ -56,9 +55,29 @@ public class UserController {
     @GetMapping("/admin/user/{id}")
     public String getUserDetail(Model model, @PathVariable("id") long id) {
         model.addAttribute("id", id);
-        Optional<User> userDetail = userService.getUserDetail(id);
-        model.addAttribute("user", userDetail.get());
+        User userDetail = userService.getUserDetail(id);
+        model.addAttribute("user", userDetail);
         return "/admin/user/show";
+    }
+
+    @GetMapping("/admin/user/update/{id}")
+    public String getUpdateUserPage(Model model, @PathVariable("id") long id) {
+        model.addAttribute("id", id);
+        User userDetail = userService.getUserDetail(id);
+        model.addAttribute("user", userDetail);
+        return "/admin/user/updateUser";
+    }
+
+    @PostMapping("/admin/user/update/{id}")
+    public String updateUserById(@ModelAttribute("User") User updateUser) {
+        User currentUser = this.userService.getUserById(updateUser.getId());
+        if (updateUser != null) {
+            updateUser.setFullName(updateUser.getFullName());
+            updateUser.setAddress(updateUser.getAddress());
+            updateUser.setPhone(updateUser.getPhone());
+            userService.handleSaveUser(currentUser);
+        }
+        return "redirect:/admin/user";
     }
 
     @PostMapping("/admin/user/delete/{id}")

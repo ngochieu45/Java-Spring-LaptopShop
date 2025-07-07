@@ -33,6 +33,7 @@
                                     <li class="list-group-item">Phone: ${user.phone}</li>
                                 </ul>
                             </div>
+                            <a href="/admin/user" class=" btn btn-success">back</a>
                         </div>
                     </div>
                 </div>
