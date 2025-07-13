@@ -24,6 +24,8 @@ public class User {
 
     private String phone;
 
+    private String avatar;
+
     public long getId() {
         return id;
     }
@@ -72,15 +74,17 @@ public class User {
         this.phone = phone;
     }
 
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", email='" + email + '\'' +
-                ", fullName='" + fullName + '\'' +
-                ", password='" + password + '\'' +
-                ", address='" + address + '\'' +
-                ", phone='" + phone + '\'' +
-                '}';
+        return "User [id=" + id + ", email=" + email + ", fullName=" + fullName + ", password=" + password
+                + ", address=" + address + ", phone=" + phone + ", avatar=" + avatar + "]";
     }
 }
