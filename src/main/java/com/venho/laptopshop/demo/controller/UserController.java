@@ -38,7 +38,7 @@ public class UserController {
         List<User> users = this.userService.getAllUser();
         model.addAttribute("users1", users);
         model.addAttribute("newUser", new User());
-        return "/admin/user/showUser";
+        return "/admin/user/show";
     }
 
     @RequestMapping(value = "/admin/user/create")
@@ -58,7 +58,7 @@ public class UserController {
         model.addAttribute("id", id);
         User userDetail = userService.getUserDetail(id);
         model.addAttribute("user", userDetail);
-        return "/admin/user/show";
+        return "/admin/user/detail";
     }
 
     @GetMapping("/admin/user/update/{id}")
@@ -66,7 +66,7 @@ public class UserController {
         model.addAttribute("id", id);
         User userDetail = userService.getUserDetail(id);
         model.addAttribute("user", userDetail);
-        return "/admin/user/updateUser";
+        return "/admin/user/update";
     }
 
     @PostMapping("/admin/user/update/{id}")
