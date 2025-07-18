@@ -90,10 +90,11 @@ public class UserController {
     @PostMapping("/admin/user/update/{id}")
     public String updateUserById(@ModelAttribute("User") User updateUser) {
         User currentUser = this.userService.getUserById(updateUser.getId());
-        if (updateUser != null) {
-            updateUser.setFullName(updateUser.getFullName());
-            updateUser.setAddress(updateUser.getAddress());
-            updateUser.setPhone(updateUser.getPhone());
+        if (currentUser != null) {
+            currentUser.setFullName(updateUser.getFullName());
+            currentUser.setAddress(updateUser.getAddress());
+            currentUser.setPhone(updateUser.getPhone());
+            currentUser.setRole(this.userService.getRoleByName(updateUser.getRole().getName()));
             userService.handleSaveUser(currentUser);
         }
         return "redirect:/admin/user";

@@ -63,6 +63,14 @@
                                                         path="address" />
                                                 </div>
 
+                                                <div class="mb-3">
+                                                    <label for="formFile" class="form-label">Role</label>
+                                                    <form:select class="form-select" path="role.name">
+                                                        <form:option value="User">User</form:option>
+                                                        <form:option value="Admin">Admin</form:option>
+                                                    </form:select>
+                                                </div>
+
                                                 <button class="btn btn-primary" type="submit">Submit</button>
                                             </form:form>
                                         </div>
