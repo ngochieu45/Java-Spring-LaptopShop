@@ -18,7 +18,6 @@
         </head>
 
         <body>
-            blow job me
             <h1>
                 ${nhu}
             </h1>
