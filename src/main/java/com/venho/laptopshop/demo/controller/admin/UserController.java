@@ -108,7 +108,7 @@ public class UserController {
     }
 
     @GetMapping("/product/{id}")
-    public String getMethodName(@PathVariable("id") long id) {
+    public String getViewDetailPage(@PathVariable("id") long id) {
         return "/client/product/view-detail";
     }
 

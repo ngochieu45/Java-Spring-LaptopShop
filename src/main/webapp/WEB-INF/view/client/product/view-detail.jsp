@@ -76,7 +76,7 @@
                         <div class="col-lg-6">
                             <div class="border rounded">
                                 <a href="#">
-                                    <img src="/client/img/single-item.jpg" class="img-fluid rounded" alt="Image">
+                                    <img src="/client/img/emiu.png" class="img-fluid rounded" alt="Image">
                                 </a>
                             </div>
                         </div>
