@@ -107,4 +107,9 @@ public class UserController {
         return "redirect:/admin/user";
     }
 
+    @GetMapping("/product/{id}")
+    public String getMethodName(@PathVariable("id") long id) {
+        return "/client/product/view-detail";
+    }
+
 }
