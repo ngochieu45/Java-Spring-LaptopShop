@@ -35,7 +35,7 @@ public class UserController {
     public String getHomePage(Model model) {
         List<User> arrUser = this.userService.getAllUserByEmail("quynhnhu0405@gmail.com");
         System.out.println(arrUser);
-        return "hello";
+        return "/client/homepage/show";
     }
 
     @RequestMapping("/admin/user")
