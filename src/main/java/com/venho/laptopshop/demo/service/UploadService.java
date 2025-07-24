@@ -20,6 +20,13 @@ public class UploadService {
     }
 
     public String handleSaveUploadFile(MultipartFile file, String targetFolder) {
+
+        // user didn't upload avatar
+        if (file.isEmpty()) {
+            return "";
+        }
+
+        // user upload avatar
         String rootPath = this.servletContext.getRealPath("/resources/images");
         String finalName = "";
         try {

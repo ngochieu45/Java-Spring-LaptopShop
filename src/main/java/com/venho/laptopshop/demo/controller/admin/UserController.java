@@ -4,11 +4,15 @@ import com.venho.laptopshop.demo.domain.User;
 import com.venho.laptopshop.demo.service.UploadService;
 import com.venho.laptopshop.demo.service.UserService;
 
+import jakarta.validation.Valid;
+
 import java.util.List;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -53,8 +57,18 @@ public class UserController {
     }
 
     @PostMapping("/admin/user/create")
-    public String createUserPage(Model model, @ModelAttribute("newUser") User hieu,
+    public String createUserPage(Model model, @ModelAttribute("newUser") @Valid User hieu,
+            BindingResult newUserBindingResult,
             @RequestParam("avatarFile") MultipartFile file) {
+
+        List<FieldError> errors = newUserBindingResult.getFieldErrors();
+        for (FieldError error : errors) {
+            System.out.println(error.getField() + " - " + error.getDefaultMessage());
+        }
+
+        if (newUserBindingResult.hasErrors()) {
+            return "/admin/user/create";
+        }
 
         String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");
         String hashPassword = this.passwordEncoder.encode(hieu.getPassword());
