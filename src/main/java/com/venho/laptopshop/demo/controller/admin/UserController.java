@@ -42,11 +42,10 @@ public class UserController {
         return "/client/homepage/show";
     }
 
-    @RequestMapping("/admin/user")
+    @GetMapping("/admin/user")
     public String getUserInfo(Model model) {
         List<User> users = this.userService.getAllUser();
         model.addAttribute("users1", users);
-        model.addAttribute("newUser", new User());
         return "/admin/user/show";
     }
 

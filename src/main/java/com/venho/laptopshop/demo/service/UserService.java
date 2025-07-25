@@ -1,8 +1,6 @@
 package com.venho.laptopshop.demo.service;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.stereotype.Service;
 
 import com.venho.laptopshop.demo.domain.Role;
@@ -19,10 +17,6 @@ public class UserService {
     public UserService(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
-    }
-
-    public String handleHello() {
-        return "hand job me";
     }
 
     public List<User> getAllUser() {
