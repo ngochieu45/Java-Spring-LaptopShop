@@ -24,16 +24,16 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotNull
     @Email(message = "Email is not valid", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
-    @NotEmpty(message = "Email cannot be empty")
     private String email;
 
     @NotNull
-    @Min(6)
+    @Min(value = 6, message = "fullname at least 6 characters")
     private String fullName;
 
     @NotNull
-    @Min(6)
+    @Min(value = 6, message = "password at least 6 characters")
     private String password;
 
     private String address;

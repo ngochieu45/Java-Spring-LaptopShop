@@ -51,15 +51,13 @@
                                                     <div class="row g-3">
                                                         <div class="col">
                                                             <c:set var="errorEmail">
-                                                                <form:errors path="password"
-                                                                    cssClass="invalid-feedback" />
+                                                                <form:errors path="email" cssClass="invalid-feedback" />
                                                             </c:set>
 
                                                             <label class="form-label" for="Email">Email</label>
                                                             <form:input
                                                                 class="form-control ${not empty errorEmail ? 'is-invalid' : ''}"
                                                                 type="email" path="email" />
-                                                            <form:errors path="email" cssClass="invalid-feedback" />
                                                             ${errorEmail}
                                                         </div>
 
@@ -86,7 +84,6 @@
                                                             <form:input
                                                                 class="form-control ${not empty errorFullName ? 'is-invalid' : ''}"
                                                                 type="text" path="fullName" />
-                                                            <form:errors path="fullName" cssClass="invalid-feedback" />
                                                             ${errorFullName}
                                                         </div>
 
