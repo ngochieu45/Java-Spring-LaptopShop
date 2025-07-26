@@ -58,8 +58,13 @@
                                                                 class="btn btn-success">View</a>
                                                             <a href="/admin/product/update/${product.id}"
                                                                 class="btn btn-warning">Update</a>
-                                                            <a href="/admin/product/delete/${product.id}"
-                                                                class="btn btn-danger">Delete</a>
+                                                            <form action="/admin/product/delete/${product.id}"
+                                                                method="post" style="display:inline;">
+                                                                <button type="submit" class="btn btn-danger"
+                                                                    onclick="return confirm('Are you sure you want to delete this product?');">
+                                                                    Delete
+                                                                </button>
+                                                            </form>
                                                         </td>
                                                     </tr>
                                                 </c:forEach>
