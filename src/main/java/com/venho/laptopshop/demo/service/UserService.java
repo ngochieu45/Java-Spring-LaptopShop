@@ -8,7 +8,10 @@ import com.venho.laptopshop.demo.domain.User;
 import com.venho.laptopshop.demo.repository.RoleRepository;
 import com.venho.laptopshop.demo.repository.UserRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
+@Transactional
 public class UserService {
 
     private final UserRepository userRepository;

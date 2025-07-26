@@ -89,7 +89,7 @@ public class UserController {
     @GetMapping("/admin/user/update/{id}")
     public String getUpdateUserPage(Model model, @PathVariable("id") long id) {
         model.addAttribute("id", id);
-        User userDetail = userService.getUserDetail(id);
+        User userDetail = userService.getUserById(id);
         model.addAttribute("user", userDetail);
         return "/admin/user/update";
     }

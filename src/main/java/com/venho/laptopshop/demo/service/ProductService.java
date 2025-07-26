@@ -7,7 +7,10 @@ import org.springframework.stereotype.Service;
 import com.venho.laptopshop.demo.domain.Product;
 import com.venho.laptopshop.demo.repository.ProductRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
+@Transactional
 public class ProductService {
     private final ProductRepository productRepository;
 
@@ -25,5 +28,9 @@ public class ProductService {
 
     public void deleteProductById(Long id) {
         this.productRepository.deleteById(id);
+    }
+
+    public Product getProductById(long id) {
+        return this.productRepository.findById(id);
     }
 }

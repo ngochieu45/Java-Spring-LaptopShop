@@ -69,4 +69,28 @@ public class ProductController {
         return "redirect:/admin/product";
     }
 
+    @GetMapping("/admin/product/update/{id}")
+    public String getUpdateProductPage(Model model, @PathVariable("id") long id) {
+        model.addAttribute("id", id);
+        Product productDetail = productService.getProductById(id);
+        model.addAttribute("product", productDetail);
+        return "/admin/product/update";
+    }
+
+    @PostMapping("/admin/product/update/{id}")
+    public String updateProduct(@ModelAttribute("product") Product updateProduct) {
+        Product currentProduct = this.productService.getProductById(updateProduct.getId());
+        if (currentProduct != null) {
+            currentProduct.setName(updateProduct.getName());
+            currentProduct.setPrice(updateProduct.getPrice());
+            currentProduct.setDetailDesc(updateProduct.getDetailDesc());
+            currentProduct.setShortDesc(updateProduct.getShortDesc());
+            currentProduct.setQuantity(updateProduct.getQuantity());
+            currentProduct.setFactory(updateProduct.getFactory());
+            currentProduct.setTarget(updateProduct.getTarget());
+            productService.handleSaveProduct(currentProduct);
+        }
+        return "redirect:/admin/product";
+    }
+
 }

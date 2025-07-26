@@ -44,8 +44,8 @@
                                         <div class="col-md-6 col-12 mx-auto">
                                             <h3>Create Product</h3>
                                             <hr>
-                                            <form:form action="/admin/product/create" method="POST"
-                                                modelAttribute="newProduct" enctype="multipart/form-data">
+                                            <form:form action="/admin/product/update/${id}" method="POST"
+                                                modelAttribute="product" enctype="multipart/form-data">
 
                                                 <div class="row g-3">
                                                     <div class="mb-3 col-12 col-md-6">

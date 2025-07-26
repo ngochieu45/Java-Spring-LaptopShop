@@ -6,4 +6,5 @@ import com.venho.laptopshop.demo.domain.Product;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
+    Product findById(long id);
 }
