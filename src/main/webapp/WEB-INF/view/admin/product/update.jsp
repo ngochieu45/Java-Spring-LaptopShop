@@ -15,11 +15,11 @@
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
                 <script>
                     $(document).ready(() => {
-                        const avatarFile = $("#avatarFile");
-                        avatarFile.change(function (e) {
+                        const product_img = $("#product_img");
+                        product_img.change(function (e) {
                             const imgURL = URL.createObjectURL(e.target.files[0]);
-                            $("#avatarPreview").attr("src", imgURL);
-                            $("#avatarPreview").css({ "display": "block" });
+                            $("#productPreview").attr("src", imgURL);
+                            $("#productPreview").css({ "display": "block" });
                         });
                     }); 
                 </script>
@@ -141,7 +141,7 @@
 
                                                     <div class="mb-3 col-12 col-md-6">
                                                         <img style="max-height: 250px; display: none;"
-                                                            alt="avatar preview" id="avatarPreview" />
+                                                            alt="product preview" id="productPreview" />
                                                     </div>
 
                                                     <div class="mb-3 col-12 text-end">

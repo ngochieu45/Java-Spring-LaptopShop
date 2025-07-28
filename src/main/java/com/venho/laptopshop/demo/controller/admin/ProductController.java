@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.venho.laptopshop.demo.domain.Product;
+import com.venho.laptopshop.demo.domain.User;
 import com.venho.laptopshop.demo.service.ProductService;
 import com.venho.laptopshop.demo.service.UploadService;
 
@@ -63,6 +64,14 @@ public class ProductController {
         return "redirect:/admin/product";
     }
 
+    @GetMapping("/admin/product/{id}")
+    public String getProductDetail(Model model, @PathVariable("id") long id) {
+        model.addAttribute("id", id);
+        Product productDetail = productService.getProductById(id);
+        model.addAttribute("product", productDetail);
+        return "/admin/product/detail";
+    }
+
     @PostMapping("/admin/product/delete/{id}")
     public String deleteProduct(@PathVariable("id") long id) {
         this.productService.deleteProductById(id);
@@ -78,9 +87,25 @@ public class ProductController {
     }
 
     @PostMapping("/admin/product/update/{id}")
-    public String updateProduct(@ModelAttribute("product") Product updateProduct) {
+    public String updateProduct(@ModelAttribute("product") @Valid Product updateProduct,
+            BindingResult productBindingResult,
+            @RequestParam("product_img") MultipartFile file) {
+
+        List<FieldError> errors = productBindingResult.getFieldErrors();
+        for (FieldError error : errors) {
+            System.out.println(error.getField() + " - " + error.getDefaultMessage());
+        }
+
+        if (productBindingResult.hasErrors()) {
+            return "/admin/product/update/{id}";
+        }
+
         Product currentProduct = this.productService.getProductById(updateProduct.getId());
         if (currentProduct != null) {
+            if (!file.isEmpty()) {
+                String img = this.uploadService.handleSaveUploadFile(file, "product");
+                currentProduct.setImage(img);
+            }
             currentProduct.setName(updateProduct.getName());
             currentProduct.setPrice(updateProduct.getPrice());
             currentProduct.setDetailDesc(updateProduct.getDetailDesc());

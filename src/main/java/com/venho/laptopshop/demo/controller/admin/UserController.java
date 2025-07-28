@@ -95,8 +95,18 @@ public class UserController {
     }
 
     @PostMapping("/admin/user/update/{id}")
-    public String updateUserById(@ModelAttribute("User") User updateUser) {
-        User currentUser = this.userService.getUserById(updateUser.getId());
+    public String updateUserById(@ModelAttribute("User") @Valid User updateUser, BindingResult userBindingResult) {
+
+        List<FieldError> errors = userBindingResult.getFieldErrors();
+        for (FieldError error : errors) {
+            System.out.println(error.getField() + " - " + error.getDefaultMessage());
+        }
+
+        if (userBindingResult.hasErrors()) {
+            return "/admin/user/update/{id}";
+        }
+
+        User currentUser = this.userService.getUserDetail(updateUser.getId());
         if (currentUser != null) {
             currentUser.setFullName(updateUser.getFullName());
             currentUser.setAddress(updateUser.getAddress());
