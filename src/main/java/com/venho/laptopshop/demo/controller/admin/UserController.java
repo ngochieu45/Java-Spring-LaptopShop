@@ -34,13 +34,6 @@ public class UserController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @GetMapping("/")
-    public String getHomePage(Model model) {
-        List<User> arrUser = this.userService.getAllUserByEmail("quynhnhu0405@gmail.com");
-        System.out.println(arrUser);
-        return "/client/homepage/show";
-    }
-
     @GetMapping("/admin/user")
     public String getUserInfo(Model model) {
         List<User> users = this.userService.getAllUser();
@@ -127,11 +120,6 @@ public class UserController {
     public String deleteUser(@PathVariable("id") long id) {
         this.userService.deleteUserById(id);
         return "redirect:/admin/user";
-    }
-
-    @GetMapping("/product/{id}")
-    public String getViewDetailPage(@PathVariable("id") long id) {
-        return "/client/product/view-detail";
     }
 
 }
