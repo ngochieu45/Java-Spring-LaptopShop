@@ -15,13 +15,22 @@
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
                 <script>
                     $(document).ready(() => {
-                        const product_img = $("#product_img");
-                        product_img.change(function (e) {
+                        const avatarFile = $("#avatarFile");
+                        const orgImage = "${product.image}";
+
+                        if (orgImage) {
+                            const urlImage = "/images/product/" + orgImage;
+                            $("#productPreview").attr("src", urlImage);
+                            $("#productPreview").css({ "display": "block" });
+                        }
+
+                        avatarFile.change(function (e) {
                             const imgURL = URL.createObjectURL(e.target.files[0]);
                             $("#productPreview").attr("src", imgURL);
                             $("#productPreview").css({ "display": "block" });
                         });
-                    }); 
+                    });
+
                 </script>
                 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 
@@ -133,15 +142,17 @@
                                                     </div>
 
                                                     <div class="mb-3 col-12 col-md-6">
-                                                        <label class="form-label" for="avatarFile">Product Image</label>
+                                                        <label class="form-label" for="product_img">Product
+                                                            Image</label>
                                                         <input class="form-control form-control-lg" type="file"
                                                             id="product_img" accept=".jpg, .png, .jpeg"
                                                             name="product_img" />
-                                                    </div>
 
-                                                    <div class="mb-3 col-12 col-md-6">
-                                                        <img style="max-height: 250px; display: none;"
-                                                            alt="product preview" id="productPreview" />
+                                                        <!-- Thêm img bên dưới input -->
+                                                        <div class="mt-3">
+                                                            <img id="productPreview" alt="product preview"
+                                                                style="max-height: 250px; display: none; border: 1px solid #ccc;" />
+                                                        </div>
                                                     </div>
 
                                                     <div class="mb-3 col-12 text-end">
