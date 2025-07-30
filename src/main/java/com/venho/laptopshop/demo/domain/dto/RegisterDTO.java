@@ -1,5 +1,8 @@
 package com.venho.laptopshop.demo.domain.dto;
 
+import com.venho.laptopshop.demo.service.validator.RegisterChecked;
+
+@RegisterChecked
 public class RegisterDTO {
     private String firstName;
     private String lastName;
