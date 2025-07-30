@@ -13,6 +13,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "user")
@@ -27,11 +28,11 @@ public class User {
     private String email;
 
     @NotNull
-    @Min(value = 6, message = "fullname at least 6 characters")
+    @Size(min = 6, message = "fullname at least 6 characters")
     private String fullName;
 
     @NotNull
-    @Min(value = 6, message = "password at least 6 characters")
+    @Size(min = 6, message = "password at least 6 characters")
     private String password;
 
     private String address;
