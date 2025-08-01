@@ -34,13 +34,13 @@ public class ProductController {
     public String getProduct(Model model) {
         List<Product> product_list = this.productService.getAllProduct();
         model.addAttribute("product_list", product_list);
-        return "/admin/product/show";
+        return "admin/product/show";
     }
 
     @GetMapping("/admin/product/create")
     public String getCreateProductPage(Model model) {
         model.addAttribute("newProduct", new Product());
-        return "/admin/product/create";
+        return "admin/product/create";
     }
 
     @PostMapping("/admin/product/create")
@@ -54,13 +54,13 @@ public class ProductController {
         }
 
         if (newProductBindingResult.hasErrors()) {
-            return "/admin/product/create";
+            return "admin/product/create";
         }
         String product_img = this.uploadService.handleSaveUploadFile(file, "product");
 
         newProduct.setImage(product_img);
         this.productService.handleSaveProduct(newProduct);
-        return "redirect:/admin/product";
+        return "redirect:admin/product";
     }
 
     @GetMapping("/admin/product/{id}")
@@ -68,13 +68,13 @@ public class ProductController {
         model.addAttribute("id", id);
         Product productDetail = productService.getProductById(id);
         model.addAttribute("product", productDetail);
-        return "/admin/product/detail";
+        return "admin/product/detail";
     }
 
     @PostMapping("/admin/product/delete/{id}")
     public String deleteProduct(@PathVariable("id") long id) {
         this.productService.deleteProductById(id);
-        return "redirect:/admin/product";
+        return "redirect:admin/product";
     }
 
     @GetMapping("/admin/product/update/{id}")
@@ -82,7 +82,7 @@ public class ProductController {
         model.addAttribute("id", id);
         Product productDetail = productService.getProductById(id);
         model.addAttribute("product", productDetail);
-        return "/admin/product/update";
+        return "admin/product/update";
     }
 
     @PostMapping("/admin/product/update/{id}")
@@ -96,7 +96,7 @@ public class ProductController {
         }
 
         if (productBindingResult.hasErrors()) {
-            return "/admin/product/update/{id}";
+            return "admin/product/update/{id}";
         }
 
         Product currentProduct = this.productService.getProductById(updateProduct.getId());
@@ -114,7 +114,7 @@ public class ProductController {
             currentProduct.setTarget(updateProduct.getTarget());
             productService.handleSaveProduct(currentProduct);
         }
-        return "redirect:/admin/product";
+        return "redirect:admin/product";
     }
 
 }

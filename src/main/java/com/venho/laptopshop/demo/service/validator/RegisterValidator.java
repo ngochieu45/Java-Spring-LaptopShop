@@ -38,6 +38,7 @@ public class RegisterValidator implements ConstraintValidator<RegisterChecked, R
                     .disableDefaultConstraintViolation();
             valid = false;
         }
+
         return valid;
     }
 }
