@@ -68,7 +68,7 @@ public class UserController {
         hieu.setPassword(hashPassword);
         hieu.setRole(this.userService.getRoleByName(hieu.getRole().getName()));
         this.userService.handleSaveUser(hieu);
-        return "redirect:admin/user";
+        return "redirect:/admin/user";
     }
 
     @GetMapping("/admin/user/{id}")
@@ -88,7 +88,7 @@ public class UserController {
     }
 
     @PostMapping("/admin/user/update/{id}")
-    public String updateUserById(@ModelAttribute("User") @Valid User updateUser, BindingResult userBindingResult) {
+    public String updateUserById(@ModelAttribute("user") @Valid User updateUser, BindingResult userBindingResult) {
 
         List<FieldError> errors = userBindingResult.getFieldErrors();
         for (FieldError error : errors) {
@@ -96,7 +96,7 @@ public class UserController {
         }
 
         if (userBindingResult.hasErrors()) {
-            return "admin/user/update/{id}";
+            return "admin/user/update";
         }
 
         User currentUser = this.userService.getUserDetail(updateUser.getId());
@@ -119,7 +119,7 @@ public class UserController {
     @PostMapping("/admin/user/delete/{id}")
     public String deleteUser(@PathVariable("id") long id) {
         this.userService.deleteUserById(id);
-        return "redirect:admin/user";
+        return "redirect:/admin/user";
     }
 
 }

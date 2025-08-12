@@ -22,7 +22,7 @@ public class ItemController {
         System.out.println("product " + product);
         model.addAttribute("id", id);
         model.addAttribute("product", product);
-        return "/client/product/view-detail";
+        return "client/product/view-detail";
     }
 
 }

@@ -37,8 +37,10 @@
                                             Sure you want to delete this user id = ${id}
                                         </div>
                                         <form action="/admin/user/delete/${id}" method="post" class="d-inline">
+                                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                                             <button type="submit" class="btn btn-danger">Delete User</button>
                                         </form>
+
                                     </div>
                                 </div>
                             </div>

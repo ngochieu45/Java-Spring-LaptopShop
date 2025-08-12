@@ -43,9 +43,7 @@
                                         <div>
                                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                                         </div>
-                                        <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                            <a class="btn btn-primary" href="/">Login</a>
-                                        </div>
+                                        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
                                     </form>
                                 </div>
                                 <div class="card-footer text-center py-3">
