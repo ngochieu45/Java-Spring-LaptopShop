@@ -67,10 +67,12 @@ public class HomePageController {
 
     @GetMapping("/login")
     public String getLoginPage(HttpServletRequest request) {
-        System.out.println("=== DEBUG LOGIN PAGE ===");
-        System.out.println("param.error = " + request.getParameter("error"));
-        System.out.println("request attr error = " + request.getAttribute("error"));
         return "client/auth/login";
+    }
+
+    @GetMapping("/access-deny")
+    public String getDenyPage(Model model) {
+        return "client/auth/deny";
     }
 
 }
