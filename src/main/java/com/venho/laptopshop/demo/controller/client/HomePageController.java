@@ -16,6 +16,7 @@ import com.venho.laptopshop.demo.domain.dto.RegisterDTO;
 import com.venho.laptopshop.demo.service.ProductService;
 import com.venho.laptopshop.demo.service.UserService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
@@ -65,8 +66,10 @@ public class HomePageController {
     }
 
     @GetMapping("/login")
-    public String getLoginPage(Model model) {
-
+    public String getLoginPage(HttpServletRequest request) {
+        System.out.println("=== DEBUG LOGIN PAGE ===");
+        System.out.println("param.error = " + request.getParameter("error"));
+        System.out.println("request attr error = " + request.getAttribute("error"));
         return "client/auth/login";
     }
 
