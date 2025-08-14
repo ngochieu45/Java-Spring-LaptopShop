@@ -88,7 +88,9 @@ public class UserController {
     }
 
     @PostMapping("/admin/user/update/{id}")
-    public String updateUserById(@ModelAttribute("user") @Valid User updateUser, BindingResult userBindingResult) {
+    public String updateUserById(@ModelAttribute("user") @Valid User updateUser,
+            BindingResult userBindingResult,
+            @RequestParam("avatarFile") MultipartFile file) {
 
         List<FieldError> errors = userBindingResult.getFieldErrors();
         for (FieldError error : errors) {
@@ -101,13 +103,15 @@ public class UserController {
 
         User currentUser = this.userService.getUserDetail(updateUser.getId());
         if (currentUser != null) {
+            String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");
             currentUser.setFullName(updateUser.getFullName());
             currentUser.setAddress(updateUser.getAddress());
             currentUser.setPhone(updateUser.getPhone());
             currentUser.setRole(this.userService.getRoleByName(updateUser.getRole().getName()));
+            currentUser.setAvatar(avatar);
             userService.handleSaveUser(currentUser);
         }
-        return "redirect:admin/user";
+        return "redirect:/admin/user";
     }
 
     @GetMapping("/admin/user/delete/{id}")
