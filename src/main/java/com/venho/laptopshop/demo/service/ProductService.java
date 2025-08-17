@@ -66,12 +66,20 @@ public class ProductService {
             // find product by id
             Product product = this.productRepository.findById(productId);
 
-            CartDetail cartDetail = new CartDetail();
-            cartDetail.setCart(cart);
-            cartDetail.setProduct(product);
-            cartDetail.setPrice(product.getPrice());
-            cartDetail.setQuantity(1);
-            this.cartDetailRepository.save(cartDetail);
+            CartDetail oldCartDetail = this.cartDetailRepository.findByCartAndProduct(cart, product);
+
+            if (oldCartDetail == null) {
+                CartDetail cartDetail = new CartDetail();
+                cartDetail.setCart(cart);
+                cartDetail.setProduct(product);
+                cartDetail.setPrice(product.getPrice());
+                cartDetail.setQuantity(1);
+                this.cartDetailRepository.save(cartDetail);
+            } else {
+                oldCartDetail.setQuantity(oldCartDetail.getQuantity() + 1);
+                this.cartDetailRepository.save(oldCartDetail);
+            }
+
         }
 
     }
