@@ -10,4 +10,6 @@ import com.venho.laptopshop.demo.domain.Product;
 @Repository
 public interface CartDetailRepository extends JpaRepository<CartDetail, Long> {
     CartDetail findByCartAndProduct(Cart cart, Product product);
+
+    CartDetail findByCart(Cart cart);
 }

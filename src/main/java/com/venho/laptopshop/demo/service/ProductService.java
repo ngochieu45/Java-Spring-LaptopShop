@@ -12,6 +12,7 @@ import com.venho.laptopshop.demo.repository.CartDetailRepository;
 import com.venho.laptopshop.demo.repository.CartRepository;
 import com.venho.laptopshop.demo.repository.ProductRepository;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -48,7 +49,7 @@ public class ProductService {
         return this.productRepository.findById(id);
     }
 
-    public void handleAddProductToCart(String email, long productId) {
+    public void handleAddProductToCart(String email, long productId, HttpSession session) {
         // check user's cart exist
         User user = this.userService.getUserByEmail(email);
         if (user != null) {
@@ -58,7 +59,7 @@ public class ProductService {
                 // create cart
                 Cart otherCart = new Cart();
                 otherCart.setUser(user);
-                otherCart.setSum(1);
+                otherCart.setSum(0);
                 cart = this.cartRepository.save(otherCart);
             }
             // save cart detail
@@ -75,6 +76,13 @@ public class ProductService {
                 cartDetail.setPrice(product.getPrice());
                 cartDetail.setQuantity(1);
                 this.cartDetailRepository.save(cartDetail);
+
+                // update sum
+                int s = cart.getSum() + 1;
+                cart.setSum(s);
+                this.cartRepository.save(cart);
+                session.setAttribute("sum", s);
+
             } else {
                 oldCartDetail.setQuantity(oldCartDetail.getQuantity() + 1);
                 this.cartDetailRepository.save(oldCartDetail);
@@ -82,5 +90,9 @@ public class ProductService {
 
         }
 
+    }
+
+    public Cart fetchByUser(User user) {
+        return this.cartRepository.findByUser(user);
     }
 }
