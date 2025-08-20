@@ -1,5 +1,6 @@
 package com.venho.laptopshop.demo.controller.client;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -65,7 +66,7 @@ public class ItemController {
         user.setId(id);
         Cart cart = this.productService.fetchByUser(user);
 
-        List<CartDetail> cartDetails = cart.getCartDetails();
+        List<CartDetail> cartDetails = cart == null ? new ArrayList<CartDetail>() : cart.getCartDetails();
 
         double totalPrice = 0;
         for (CartDetail cd : cartDetails) {
