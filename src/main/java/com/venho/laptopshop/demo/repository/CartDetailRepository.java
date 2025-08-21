@@ -1,5 +1,7 @@
 package com.venho.laptopshop.demo.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,4 +14,6 @@ public interface CartDetailRepository extends JpaRepository<CartDetail, Long> {
     CartDetail findByCartAndProduct(Cart cart, Product product);
 
     CartDetail findByCart(Cart cart);
+
+    List<CartDetail> findByCartId(Long cartId);
 }
