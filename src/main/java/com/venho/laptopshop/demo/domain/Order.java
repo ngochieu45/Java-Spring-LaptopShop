@@ -16,6 +16,12 @@ public class Order {
 
     private double totalPrice;
 
+    private String receiverName;
+
+    private String receiverPhone;
+
+    private String receiverAddress;
+
     public long getId() {
         return id;
     }
@@ -32,9 +38,34 @@ public class Order {
         this.totalPrice = totalPrice;
     }
 
+    public String getReceiverName() {
+        return receiverName;
+    }
+
+    public void setReceiverName(String receiverName) {
+        this.receiverName = receiverName;
+    }
+
+    public String getReceiverPhone() {
+        return receiverPhone;
+    }
+
+    public void setReceiverPhone(String receiverPhone) {
+        this.receiverPhone = receiverPhone;
+    }
+
+    public String getReceiverAddress() {
+        return receiverAddress;
+    }
+
+    public void setReceiverAddress(String receiverAddress) {
+        this.receiverAddress = receiverAddress;
+    }
+
     @Override
     public String toString() {
-        return "Order [id=" + id + ", totalPrice=" + totalPrice + "]";
+        return "Order [id=" + id + ", totalPrice=" + totalPrice + ", receiverName=" + receiverName + ", receiverPhone="
+                + receiverPhone + ", receiverAddress=" + receiverAddress + "]";
     }
 
     // user id
