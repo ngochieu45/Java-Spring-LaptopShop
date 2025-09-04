@@ -1,5 +1,7 @@
 package com.venho.laptopshop.demo.domain;
 
+import java.io.Serializable;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,21 +11,24 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "cartdetail")
-public class CartDetail {
+@Table(name = "order_detail")
+public class OrderDetail implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private long quantity;
-
     private double price;
 
-    @ManyToOne()
-    @JoinColumn(name = "cart_id")
-    private Cart cart;
+    // order_id: long
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
 
+    // product_id: long
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
@@ -52,12 +57,12 @@ public class CartDetail {
         this.price = price;
     }
 
-    public Cart getCart() {
-        return cart;
+    public Order getOrder() {
+        return order;
     }
 
-    public void setCart(Cart cart) {
-        this.cart = cart;
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
     public Product getProduct() {
