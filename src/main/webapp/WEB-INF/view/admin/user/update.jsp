@@ -9,9 +9,7 @@
                     <meta charset="utf-8" />
                     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
                     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-                    <meta name="description" content="Hỏi Dân IT - Dự án laptopshop" />
-                    <meta name="author" content="Hỏi Dân IT" />
-                    <title>Dashboard - Hỏi Dân IT</title>
+                    <title>Update User</title>
                     <link href="/css/styles.css" rel="stylesheet" />
                     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
                     <script>
@@ -102,9 +100,9 @@
                                                     <div class="row g-3">
                                                         <div class="col">
                                                             <label for="formFile" class="form-label">Role</label>
-                                                            <form:select class="form-select" path="role.name">
-                                                                <form:option value="User">User</form:option>
-                                                                <form:option value="Admin">Admin</form:option>
+                                                            <form:select class="form-select" path="role.id">
+                                                                <form:option value="1">Admin</form:option>
+                                                                <form:option value="2">User</form:option>
                                                             </form:select>
                                                         </div>
 
