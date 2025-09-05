@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.venho.laptopshop.demo.domain.Order;
 import com.venho.laptopshop.demo.service.OrderService;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class OrderController {
