@@ -9,5 +9,4 @@ import com.venho.laptopshop.demo.domain.User;
 @Repository
 public interface CartRepository extends JpaRepository<Cart, Long> {
     Cart findByUser(User user);
-
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.venho.laptopshop.demo.domain.Cart;
 import com.venho.laptopshop.demo.domain.CartDetail;
+import com.venho.laptopshop.demo.domain.Order;
 import com.venho.laptopshop.demo.domain.Product;
 import com.venho.laptopshop.demo.domain.User;
 import com.venho.laptopshop.demo.repository.CartDetailRepository;
@@ -55,7 +56,7 @@ public class ItemController {
         long productId = id;
 
         String email = (String) session.getAttribute("email");
-        this.productService.handleAddProductToCart(email, productId, session);
+        this.productService.handleAddProductToCart(email, productId, session, 1);
         return "redirect:/";
     }
 
@@ -137,6 +138,19 @@ public class ItemController {
     @GetMapping("/thanks")
     public String getThanksPage() {
         return "client/cart/thanks";
+    }
+
+    @GetMapping("/history")
+    public String getHistoryPage(Model model, HttpServletRequest request) {
+        User currentUser = new User();
+        HttpSession session = request.getSession(false);
+        long id = (long) session.getAttribute("id");
+        currentUser.setId(id);
+
+        List<Order> currentOrder = this.productService.getPurchaseHistory(currentUser);
+
+        model.addAttribute("order_list", currentOrder);
+        return "client/cart/history";
     }
 
 }

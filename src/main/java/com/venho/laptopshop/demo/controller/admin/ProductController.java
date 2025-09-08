@@ -17,7 +17,10 @@ import com.venho.laptopshop.demo.domain.Product;
 import com.venho.laptopshop.demo.service.ProductService;
 import com.venho.laptopshop.demo.service.UploadService;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class ProductController {
@@ -115,6 +118,16 @@ public class ProductController {
             productService.handleSaveProduct(currentProduct);
         }
         return "redirect:admin/product";
+    }
+
+    @PostMapping("/add-product-from-view-detail")
+    public String handleAddProductFromViewDetail(@RequestParam("id") long id,
+            @RequestParam("quantity") long quantity, HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+
+        String email = (String) session.getAttribute("email");
+        this.productService.handleAddProductToCart(email, id, session, quantity);
+        return "redirect:/product/" + id;
     }
 
 }

@@ -109,146 +109,26 @@
                                                 </button>
                                             </div>
                                             <input type="text" class="form-control form-control-sm text-center border-0"
-                                                value="1">
+                                                value="1" data-cart-detail-index="0">
                                             <div class="input-group-btn">
                                                 <button class="btn btn-sm btn-plus rounded-circle bg-light border">
                                                     <i class="fa fa-plus"></i>
                                                 </button>
                                             </div>
                                         </div>
-                                        <a href="#"
-                                            class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i
-                                                class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <nav>
-                                            <div class="nav nav-tabs mb-3">
-                                                <button class="nav-link active border-white border-bottom-0"
-                                                    type="button" role="tab" id="nav-about-tab" data-bs-toggle="tab"
-                                                    data-bs-target="#nav-about" aria-controls="nav-about"
-                                                    aria-selected="true">Description</button>
-                                                <button class="nav-link border-white border-bottom-0" type="button"
-                                                    role="tab" id="nav-mission-tab" data-bs-toggle="tab"
-                                                    data-bs-target="#nav-mission" aria-controls="nav-mission"
-                                                    aria-selected="false">Reviews</button>
-                                            </div>
-                                        </nav>
-                                        <div class="tab-content mb-5">
-                                            <div class="tab-pane active" id="nav-about" role="tabpanel"
-                                                aria-labelledby="nav-about-tab">
-                                                <p>${product.detailDesc}</p>
-                                                <div class="px-2">
-                                                    <div class="row g-4">
-                                                        <div class="col-6">
-                                                            <div
-                                                                class="row bg-light align-items-center text-center justify-content-center py-2">
-                                                                <div class="col-6">
-                                                                    <p class="mb-0">Weight</p>
-                                                                </div>
-                                                                <div class="col-6">
-                                                                    <p class="mb-0">1 kg</p>
-                                                                </div>
-                                                            </div>
-                                                            <div
-                                                                class="row text-center align-items-center justify-content-center py-2">
-                                                                <div class="col-6">
-                                                                    <p class="mb-0">Country of Origin</p>
-                                                                </div>
-                                                                <div class="col-6">
-                                                                    <p class="mb-0">Agro Farm</p>
-                                                                </div>
-                                                            </div>
-                                                            <div
-                                                                class="row bg-light text-center align-items-center justify-content-center py-2">
-                                                                <div class="col-6">
-                                                                    <p class="mb-0">Quality</p>
-                                                                </div>
-                                                                <div class="col-6">
-                                                                    <p class="mb-0">Organic</p>
-                                                                </div>
-                                                            </div>
-                                                            <div
-                                                                class="row text-center align-items-center justify-content-center py-2">
-                                                                <div class="col-6">
-                                                                    <p class="mb-0">Сheck</p>
-                                                                </div>
-                                                                <div class="col-6">
-                                                                    <p class="mb-0">Healthy</p>
-                                                                </div>
-                                                            </div>
-                                                            <div
-                                                                class="row bg-light text-center align-items-center justify-content-center py-2">
-                                                                <div class="col-6">
-                                                                    <p class="mb-0">Min Weight</p>
-                                                                </div>
-                                                                <div class="col-6">
-                                                                    <p class="mb-0">250 Kg</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-xl-3">
-                                <div class="row g-4 fruite">
-                                    <div class="col-lg-12">
-                                        <div class="input-group w-100 mx-auto d-flex mb-4">
-                                            <input type="search" class="form-control p-3" placeholder="keywords"
-                                                aria-describedby="search-icon-1">
-                                            <span id="search-icon-1" class="input-group-text p-3"><i
-                                                    class="fa fa-search"></i></span>
-                                        </div>
-                                        <div class="mb-4">
-                                            <h4>Categories</h4>
-                                            <ul class="list-unstyled fruite-categorie">
-                                                <li>
-                                                    <div class="d-flex justify-content-between fruite-name">
-                                                        <a href="#"><i class="fas fa-apple-alt me-2"></i>Apples</a>
-                                                        <span>(3)</span>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="d-flex justify-content-between fruite-name">
-                                                        <a href="#"><i class="fas fa-apple-alt me-2"></i>Oranges</a>
-                                                        <span>(5)</span>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="d-flex justify-content-between fruite-name">
-                                                        <a href="#"><i class="fas fa-apple-alt me-2"></i>Strawbery</a>
-                                                        <span>(2)</span>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="d-flex justify-content-between fruite-name">
-                                                        <a href="#"><i class="fas fa-apple-alt me-2"></i>Banana</a>
-                                                        <span>(8)</span>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="d-flex justify-content-between fruite-name">
-                                                        <a href="#"><i class="fas fa-apple-alt me-2"></i>Pumpkin</a>
-                                                        <span>(5)</span>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-12">
-                                        <div class="position-relative">
-                                            <img src="/client/img/banner-fruits.jpg" class="img-fluid w-100 rounded"
-                                                alt="">
-                                            <div class="position-absolute"
-                                                style="top: 50%; right: 10px; transform: translateY(-50%);">
-                                                <h3 class="text-secondary fw-bold">Fresh <br> Fruits <br> Banner</h3>
-                                            </div>
-                                        </div>
+                                        <form action="/add-product-from-view-detail" method="post"
+                                            modelAttribute="product">
+                                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                            <input class="form-control d-none" type="text" value="${product.id}"
+                                                name="id" />
+                                            <input class="form-control d-none" type="text" name="quantity" value="1"
+                                                id="cartDetails0.quantity" />
+                                            <button
+                                                class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i
+                                                    class="fa fa-shopping-bag me-2 text-primary"></i>
+                                                add to cart
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
