@@ -1,6 +1,9 @@
 package com.venho.laptopshop.demo.service;
 
 import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.venho.laptopshop.demo.domain.Role;
@@ -30,8 +33,8 @@ public class UserService {
         this.orderRepository = orderRepository;
     }
 
-    public List<User> getAllUser() {
-        return this.userRepository.findAll();
+    public Page<User> getAllUser(Pageable pageable) {
+        return this.userRepository.findAll(pageable);
     }
 
     public User getUserById(long id) {

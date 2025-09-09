@@ -7,7 +7,11 @@ import com.venho.laptopshop.demo.service.UserService;
 import jakarta.validation.Valid;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,9 +39,24 @@ public class UserController {
     }
 
     @GetMapping("/admin/user")
-    public String getUserInfo(Model model) {
-        List<User> users = this.userService.getAllUser();
+    public String getUserInfo(Model model,
+            @RequestParam("page") Optional<String> pageOptional) {
+
+        int page = 1;
+        try {
+            if (pageOptional.isPresent()) {
+                page = Integer.parseInt(pageOptional.get());
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        Pageable pageable = PageRequest.of(page - 1, 5);
+        Page<User> listUser = this.userService.getAllUser(pageable);
+        List<User> users = listUser.getContent();
         model.addAttribute("users1", users);
+
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", listUser.getTotalPages());
         return "admin/user/show";
     }
 

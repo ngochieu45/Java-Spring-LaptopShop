@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import com.venho.laptopshop.demo.domain.Cart;
 import com.venho.laptopshop.demo.domain.CartDetail;
@@ -50,8 +52,8 @@ public class ProductService {
         return this.productRepository.save(product);
     }
 
-    public List<Product> getAllProduct() {
-        return this.productRepository.findAll();
+    public Page<Product> getAllProduct(Pageable pageable) {
+        return this.productRepository.findAll(pageable);
     }
 
     public void deleteProductById(Long id) {
@@ -59,7 +61,7 @@ public class ProductService {
     }
 
     public Product getProductById(long id) {
-        return this.productRepository.findById(id);
+        return this.productRepository.findById(id).get();
     }
 
     public void handleAddProductToCart(String email, long productId, HttpSession session, long quantity) {
@@ -78,7 +80,7 @@ public class ProductService {
             // save cart detail
 
             // find product by id
-            Product product = this.productRepository.findById(productId);
+            Product product = this.productRepository.findById(productId).get();
 
             CartDetail oldCartDetail = this.cartDetailRepository.findByCartAndProduct(cart, product);
 

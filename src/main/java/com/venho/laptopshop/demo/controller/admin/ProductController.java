@@ -1,7 +1,11 @@
 package com.venho.laptopshop.demo.controller.admin;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,7 +24,6 @@ import com.venho.laptopshop.demo.service.UploadService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class ProductController {
@@ -34,9 +37,24 @@ public class ProductController {
     }
 
     @GetMapping("/admin/product")
-    public String getProduct(Model model) {
-        List<Product> product_list = this.productService.getAllProduct();
-        model.addAttribute("product_list", product_list);
+    public String getProduct(Model model,
+            @RequestParam("page") Optional<String> pageOptional) {
+
+        int page = 1;
+        try {
+            if (pageOptional.isPresent()) {
+                page = Integer.parseInt(pageOptional.get());
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        Pageable pageable = PageRequest.of(page - 1, 5);
+        Page<Product> product_list = this.productService.getAllProduct(pageable);
+        List<Product> listProduct = product_list.getContent();
+        model.addAttribute("product_list", listProduct);
+
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", product_list.getTotalPages());
         return "admin/product/show";
     }
 
