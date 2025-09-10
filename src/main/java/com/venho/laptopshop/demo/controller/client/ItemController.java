@@ -2,6 +2,11 @@ package com.venho.laptopshop.demo.controller.client;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,6 +44,29 @@ public class ItemController {
         this.cartDetailRepository = cartDetailRepository;
         this.userService = userService;
         this.cartRepository = cartRepository;
+    }
+
+    @GetMapping("/products")
+    public String getMethodName(Model model,
+            @RequestParam("page") Optional<String> pageOptional) {
+
+        int page = 1;
+        try {
+            if (pageOptional.isPresent()) {
+                page = Integer.parseInt(pageOptional.get());
+            }
+        } catch (Exception e) {
+
+        }
+        Pageable pageable = PageRequest.of(page - 1, 6);
+        Page<Product> prs = this.productService.getAllProduct(pageable);
+        List<Product> products = prs.getContent();
+
+        model.addAttribute("products", products);
+
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", prs.getTotalPages());
+        return "client/homepage/all-products";
     }
 
     @GetMapping("/product/{id}")

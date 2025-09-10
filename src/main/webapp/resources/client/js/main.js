@@ -127,6 +127,25 @@
         $('#videoModal').on('hide.bs.modal', function (e) {
             $("#video").attr('src', $videoSrc);
         })
+
+
+        // add active class to header
+        const navElement = $("#navbarCollapse");
+        const currentUrl = window.location.pathname;
+
+        // reset toàn bộ
+        navElement.find('a.nav-link').removeClass('active');
+
+        navElement.find('a.nav-link').each(function () {
+            const link = $(this);
+            const href = link.attr('href');
+
+            // so khớp chính xác
+            if (href === currentUrl) {
+                link.addClass('active');
+            }
+        });
+
     });
 
 
