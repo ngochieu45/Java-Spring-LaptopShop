@@ -1,6 +1,7 @@
 package com.venho.laptopshop.demo.controller.client;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,7 +49,12 @@ public class ItemController {
 
     @GetMapping("/products")
     public String getMethodName(Model model,
-            @RequestParam("page") Optional<String> pageOptional) {
+            @RequestParam("page") Optional<String> pageOptional,
+            @RequestParam("name") Optional<String> nameOptional,
+            @RequestParam("price") Optional<String> priceOptional,
+            @RequestParam("factory") Optional<String> factoryOptional,
+            @RequestParam("target") Optional<String> targetOptional,
+            @RequestParam("sort") Optional<String> sortOptional) {
 
         int page = 1;
         try {
@@ -58,8 +64,22 @@ public class ItemController {
         } catch (Exception e) {
 
         }
+
         Pageable pageable = PageRequest.of(page - 1, 6);
-        Page<Product> prs = this.productService.getAllProduct(pageable);
+
+        String name = nameOptional.isPresent() ? nameOptional.get() : "";
+
+        // Integer price = priceOptional.isPresent() ?
+        // Integer.parseInt(priceOptional.get()) : null;
+
+        // String factory = factoryOptional.isPresent() ? factoryOptional.get() : "";
+        // List<String> factory = Arrays.asList(factoryOptional.get().split(","));
+
+        Page<Product> prs = this.productService.getAllProductWithSpecName(pageable, name);
+        // Page<Product> prs =
+        // this.productService.getAllProductWithSpecMinPrice(pageable, price);
+        // Page<Product> prs = this.productService.matchFactory(pageable, factory);
+
         List<Product> products = prs.getContent();
 
         model.addAttribute("products", products);

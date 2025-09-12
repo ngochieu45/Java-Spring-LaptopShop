@@ -6,18 +6,21 @@ import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import com.venho.laptopshop.demo.domain.Cart;
 import com.venho.laptopshop.demo.domain.CartDetail;
 import com.venho.laptopshop.demo.domain.Order;
 import com.venho.laptopshop.demo.domain.OrderDetail;
 import com.venho.laptopshop.demo.domain.Product;
+import com.venho.laptopshop.demo.domain.Product_;
 import com.venho.laptopshop.demo.domain.User;
 import com.venho.laptopshop.demo.repository.CartDetailRepository;
 import com.venho.laptopshop.demo.repository.CartRepository;
 import com.venho.laptopshop.demo.repository.OrderDetailRepository;
 import com.venho.laptopshop.demo.repository.OrderRepository;
 import com.venho.laptopshop.demo.repository.ProductRepository;
+import com.venho.laptopshop.demo.service.specification.ProductSpecs;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
@@ -54,6 +57,22 @@ public class ProductService {
 
     public Page<Product> getAllProduct(Pageable pageable) {
         return this.productRepository.findAll(pageable);
+    }
+
+    public Page<Product> getAllProductWithSpecName(Pageable pageable, String name) {
+        return this.productRepository.findAll(ProductSpecs.nameLike(name), pageable);
+    }
+
+    public Page<Product> getAllProductWithSpecMinPrice(Pageable pageable, int price) {
+        return this.productRepository.findAll(ProductSpecs.minPrice(price), pageable);
+    }
+
+    public Page<Product> getAllProductWithSpecMaxPrice(Pageable pageable, int price) {
+        return this.productRepository.findAll(ProductSpecs.maxPrice(price), pageable);
+    }
+
+    public Page<Product> matchFactory(Pageable pageable, List<String> factory) {
+        return this.productRepository.findAll(ProductSpecs.factoryLike(factory), pageable);
     }
 
     public void deleteProductById(Long id) {
