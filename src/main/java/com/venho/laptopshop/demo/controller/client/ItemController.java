@@ -8,6 +8,7 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +20,9 @@ import com.venho.laptopshop.demo.domain.Cart;
 import com.venho.laptopshop.demo.domain.CartDetail;
 import com.venho.laptopshop.demo.domain.Order;
 import com.venho.laptopshop.demo.domain.Product;
+import com.venho.laptopshop.demo.domain.Product_;
 import com.venho.laptopshop.demo.domain.User;
+import com.venho.laptopshop.demo.domain.dto.ProductCretiriaDTO;
 import com.venho.laptopshop.demo.repository.CartDetailRepository;
 import com.venho.laptopshop.demo.repository.CartRepository;
 import com.venho.laptopshop.demo.service.ProductService;
@@ -49,43 +52,44 @@ public class ItemController {
 
     @GetMapping("/products")
     public String getMethodName(Model model,
-            @RequestParam("page") Optional<String> pageOptional,
-            @RequestParam("name") Optional<String> nameOptional,
-            @RequestParam("price") Optional<String> priceOptional,
-            @RequestParam("factory") Optional<String> factoryOptional,
-            @RequestParam("target") Optional<String> targetOptional,
-            @RequestParam("sort") Optional<String> sortOptional) {
+            ProductCretiriaDTO productCretiriaDTO,
+            HttpServletRequest request) {
 
         int page = 1;
+        Pageable pageable = null;
         try {
-            if (pageOptional.isPresent()) {
-                page = Integer.parseInt(pageOptional.get());
+            if (productCretiriaDTO.getPage().isPresent()) {
+                page = Integer.parseInt(productCretiriaDTO.getPage().get());
             }
         } catch (Exception e) {
 
         }
 
-        Pageable pageable = PageRequest.of(page - 1, 6);
+        if (productCretiriaDTO.getSort() != null && productCretiriaDTO.getSort().isPresent()) {
+            String sort = productCretiriaDTO.getSort().get();
+            if (sort.equals("ascending")) {
+                pageable = PageRequest.of(page - 1, 6, Sort.by(Product_.PRICE).ascending());
+            } else if (sort.equals("descending")) {
+                pageable = PageRequest.of(page - 1, 6, Sort.by(Product_.PRICE).descending());
+            } else {
+                pageable = PageRequest.of(page - 1, 6);
+            }
+        }
 
-        String name = nameOptional.isPresent() ? nameOptional.get() : "";
+        Page<Product> prs = this.productService.fetchProductsWithSpec(pageable, productCretiriaDTO);
 
-        // Integer price = priceOptional.isPresent() ?
-        // Integer.parseInt(priceOptional.get()) : null;
+        List<Product> products = prs.getContent().size() > 0 ? prs.getContent() : new ArrayList<>();
 
-        // String factory = factoryOptional.isPresent() ? factoryOptional.get() : "";
-        // List<String> factory = Arrays.asList(factoryOptional.get().split(","));
-
-        Page<Product> prs = this.productService.getAllProductWithSpecName(pageable, name);
-        // Page<Product> prs =
-        // this.productService.getAllProductWithSpecMinPrice(pageable, price);
-        // Page<Product> prs = this.productService.matchFactory(pageable, factory);
-
-        List<Product> products = prs.getContent();
+        String qs = request.getQueryString();
+        if (qs != null) {
+            qs = qs.replace("page=" + page, "");
+        }
 
         model.addAttribute("products", products);
 
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", prs.getTotalPages());
+        model.addAttribute("queryString", qs);
         return "client/homepage/all-products";
     }
 

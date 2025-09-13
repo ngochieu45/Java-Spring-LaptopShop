@@ -170,19 +170,19 @@
 
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="radio" id="sort-1"
-                                                    value="gia-tang-dan" name="radio-sort">
+                                                    value="ascending" name="radio-sort">
                                                 <label class="form-check-label" for="sort-1">Giá tăng dần</label>
                                             </div>
 
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="radio" id="sort-2"
-                                                    value="gia-giam-dan" name="radio-sort">
+                                                    value="descending" name="radio-sort">
                                                 <label class="form-check-label" for="sort-2">Giá giảm dần</label>
                                             </div>
 
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="radio" id="sort-3" checked
-                                                    value="gia-nothing" name="radio-sort">
+                                                    value="nothing" name="radio-sort">
                                                 <label class="form-check-label" for="sort-3">Không sắp xếp</label>
                                             </div>
 
